@@ -1,15 +1,9 @@
-const mysql = require('mysql');
-mysql.connect('mysql://localhost/my_database');
+let db = require('../data/database')
 
-const Schema = mysql.Schema;
+const BrandModel = {
+  getAll:function(callback){
+		return db.query("Select * FROM brand",callback);
+	},
+}
 
-const HangXeSchema = new Schema({
-  hang_xe_id: String,
-  ten_hang_xe: String,
-}, {
-    collection: 'hangxe'
-});
-
-const HangXeModel = mysql.model('hangxe', HangXeSchema)
-
-module.exports = HangXeModel
+module.exports = BrandModel
