@@ -27,13 +27,13 @@
         <div class="query__area">
             <div class="brand">
                 <select id="brandList" class="brand__list">
-                    <!-- <option value="">TOYOTA</option>
+                    <option value="">TOYOTA</option>
                     <option value="">HYUNDAI</option>
                     <option value="">MAZDA</option>
                     <option value="">CHEVROLET</option>
                     <option value="">KIA</option>
                     <option value="">HONDA</option>
-                    <option value="">MITSUBISHI</option> -->
+                    <option value="">MITSUBISHI</option>
                     <option selected="selected" value="0">--Chọn hãng xe--</option>
                 </select>
             </div>
@@ -61,37 +61,6 @@
 
         <div class="output__area"></div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        let data = {
-            toyota: {
-                name: "TOYOTA",
-                model: {
-                    model1: "CIVIC 1",
-                    model2: "CIVIC 2"
-                }
-            } 
-        };
-
-        $.each(data, function (key, obj) {
-            $('#brandList').append($('<option>', {
-                value: key,
-                text: obj.name
-            }));
-        });
-
-        $("#brandList").on("change", function () {
-            let brand = $(this).val();
-            $.each(data[brand].model, function (key, obj) {
-                $('#modelList').append($('<option>', {
-                    value: key,
-                    text: obj
-                }));
-            });
-        });
-    </script>
 </body>
 
 </html>

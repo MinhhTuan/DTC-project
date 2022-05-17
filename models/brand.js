@@ -11,4 +11,6 @@ const Brand = db.define('brand', {
 	brand_name: Sequelize.STRING
 })
 
+
+
 module.exports = Brand

@@ -1,5 +1,10 @@
-var express = require("express");
-var router = express.Router();
-var Brand = require("./../models/brand");
-var Model = require("./../models/model");
-var Solution = require("./../models/solution");
+const express = require("express");
+const router = express.Router();
+const indexController = require('../controllers/index_controller')
+
+router.get('/', indexController.getBrands)
+router.get('/models/:brandId', indexController.getModels)
+router.get('/result', indexController.getResult)
+
+module.exports = router
+
