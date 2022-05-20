@@ -1,3 +1,12 @@
+# Install 
+1. git clone <git url>
+2. ``` cp .env.example .env ```
+3. ``` docker-compose up -d ```
+4. Access web at localhost:3001
+5. Access PhpMyadmin at localhost:8081
+    User: root 
+    Pass: root
+
 # Steps to upload code:
 1. git add .
 2. git commit -m "message"

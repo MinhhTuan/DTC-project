@@ -27,5 +27,19 @@ services:
       - DB_PORT=$MYSQLDB_DOCKER_PORT
     stdin_open: true
     tty: true
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    env_file: .env
+    links:
+      - db
+    environment:
+      PMA_HOST: $PMA_HOST
+      PMA_PORT: $PMA_PORT
+      PMA_ARBITRARY: $PMA_ARBITRARY
+    restart: always
+    ports:
+      - 8081:80
 volumes: 
   db:
