@@ -16,14 +16,15 @@ body {
   font-size: 40px;
   justify-content: space-between;
   display: flex;
-  padding-right: 1rem;
   align-items: center;
+  padding: 0px 205px 0px 205px;
 }
 
 /* header left */
 .header__left {
   margin-left: 1rem;
   float: left;
+  vertical-align: middle;
 }
 
 .header__left img {
@@ -37,7 +38,6 @@ body {
 }
 
 .header__left a {
-  float: right;
   color: black;
   text-align: center;
   padding: 12px;
@@ -76,18 +76,29 @@ body {
 
 .container {
   height: 230vh;
-  padding: 5rem;
-  background-image: url('/images/background.png');
+  /* background-image: url('/images/car-machine-2.jpg'); */
+  /* background-size: contain;
+  background-repeat: no-repeat; */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.container__img {
+  height: 50vh;
+  background-image: url('/images/car-machine-2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .query__area {
   justify-content: space-between;
   display: flex;
   padding: 3rem;
+  padding-top: 4rem;
 }
 
 .brand__list {
-  width: 18rem;
+  width: 14rem;
   height: 4rem;
   border-radius: 2rem;
   font-size: 20px;
@@ -96,7 +107,7 @@ body {
 }
 
 .model__list {
-  width: 18rem;
+  width: 14rem;
   height: 4rem;
   border-radius: 2rem;
   font-size: 20px;
@@ -105,7 +116,7 @@ body {
 }
 
 .year__list {
-  width: 18rem;
+  width: 14rem;
   height: 4rem;
   border-radius: 2rem;
   font-size: 20px;
@@ -114,7 +125,7 @@ body {
 }
 
 input {
-  width: 18rem;
+  width: 14rem;
   height: 4rem;
   border-radius: 2rem;
   font-size: 20px;
@@ -123,7 +134,7 @@ input {
 }
 
 .submit {
-  width: 18rem;
+  width: 14rem;
   height: 4rem;
 }
 
@@ -192,8 +203,9 @@ input {
   /* border-radius: 2rem; */
   background-color: white;
   margin: 9rem;
-  margin-left: 20rem;
-  margin-right: 20rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  margin-top: 1rem;
   box-shadow: rgb(231, 92, 220) 0px 22px 70px 4px;
 }
 
