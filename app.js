@@ -34,3 +34,4 @@ Solution.belongsTo(Model, {
 
 db.sync().then(app.listen(3000))
 
+
