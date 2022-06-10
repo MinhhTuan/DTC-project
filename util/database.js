@@ -1,8 +1,9 @@
 const {Sequelize} = require('sequelize')
+const dbConfig = require('../config/db.config')
 const sequelize = new Sequelize('dtc', 'root', '', {
-    dialect: 'mysql',
-    host: '0.tcp.ap.ngrok.io',
-    port: 16696
+    dialect: dbConfig.dialect,
+    host: dbConfig.HOST,
+    port: dbConfig.port
 })
 
 module.exports = sequelize
