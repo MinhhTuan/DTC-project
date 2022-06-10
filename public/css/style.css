@@ -13,7 +13,6 @@ body {
   overflow: hidden;
   height: 5rem;
   background-color: #f1f1f1;;
-  font-size: 40px;
   justify-content: space-between;
   display: flex;
   align-items: center;
@@ -24,7 +23,6 @@ body {
 .header__left {
   margin-left: 1rem;
   float: left;
-  vertical-align: middle;
 }
 
 .header__left img {
@@ -38,13 +36,12 @@ body {
 }
 
 .header__left a {
+  float: right;
   color: black;
-  text-align: center;
   padding: 12px;
   text-decoration: none;
-  font-size: 20px; 
+  font-size: 16px; 
   line-height: 25px;
-  border-radius: 4px;
 }
 
 /* header right */
@@ -64,7 +61,7 @@ body {
   text-align: center;
   padding: 12px;
   text-decoration: none;
-  font-size: 20px; 
+  font-size: 16px; 
   line-height: 25px;
   border-radius: 4px;
 }
@@ -76,15 +73,10 @@ body {
 
 .container {
   height: 230vh;
-  /* background-image: url('/images/car-machine-2.jpg'); */
-  /* background-size: contain;
-  background-repeat: no-repeat; */
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .container__img {
-  height: 50vh;
+  height: 70vh;
   background-image: url('/images/car-machine-2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -95,6 +87,8 @@ body {
   display: flex;
   padding: 3rem;
   padding-top: 4rem;
+  padding-left: 205px;
+  padding-right: 205px;
 }
 
 .brand__list {
@@ -203,8 +197,8 @@ input {
   /* border-radius: 2rem; */
   background-color: white;
   margin: 9rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
   margin-top: 1rem;
   box-shadow: rgb(231, 92, 220) 0px 22px 70px 4px;
 }
