@@ -4,7 +4,7 @@ const Model = require('../models/model')
 const Solution = require('../models/solution')
 
 exports.getBrands = (req, res, next) => {
-    const years = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2018', '2019', '2020']
+    const years = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2018', '2019', '2020', '2021']
     Brand.findAll().then(
         (brands) => res.render('index', {
             'brands': brands,
