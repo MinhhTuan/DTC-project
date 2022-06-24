@@ -30,8 +30,6 @@ Solution.belongsTo(Model, {
   onDelete: 'CASCADE'
 })
 
-
-
 db.sync().then(app.listen(3000))
 
 
