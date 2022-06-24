@@ -11,19 +11,20 @@ block content
               each brand in brands 
                 option(value=brand.id) #{brand.brand_name}
             
-            option(selected='selected' value='0') --Ch&#x1ECD;n h&atilde;ng xe--
+            option(selected='selected' value='0') Chọn hãng xe
         .model
           select#modelList.select__box(name='model_id')
-            option(selected='selected' value='0') --Ch&#x1ECD;n d&ograve;ng xe--
+            option(selected='selected' value='0') Chọn dòng xe
       .query__right 
         .year
           select#yearList.select__box
             if years.length  > 0
               each year in years 
                 option(value=year) #{year}
-            option(selected='selected' value='0') --Ch&#x1ECD;n n&abreve;m s&#x1EA3;n xu&#x1EA5;t--
+            option(selected='selected' value='0') Chọn năm sản xuất
         .error__code
-          input(type='text' name='error_code' placeholder='Nhập mã lỗi')
+          select#errorList.select__box
+            option(selected='selected' value='0') Chọn mã lỗi
     button#btnSubmit.btn Tra cứu              
       i.fa-solid.fa-magnifying-glass
     .output__area
@@ -74,7 +75,7 @@ block content
             $("#modelList").empty();
             $('#modelList').append($('<option>', {
                 value: 0,
-                text: "--Chọn dòng xe--"
+                text: "Chọn dòng xe"
             }));
             $.each(data, function( index, obj) {
               $('#modelList').append($('<option>', {
@@ -84,14 +85,32 @@ block content
             });
           });
       });
+      
+      $("#modelList").on("change", function () {
+          let model = $(this).val();
+          
+          $.get( "/errors/" + model, function( data ) {
+            $("#errorList").empty();
+            $('#errorList').append($('<option>', {
+                value: 0,
+                text: "Chọn mã lỗi"
+            }));
+            $.each(data, function( index, obj) {
+              $('#errorList').append($('<option>', {
+                  value: obj.id,
+                  text: obj.error_code
+              }));
+            });
+          });
+      });
 
       $("#btnSubmit").on("click", function(){
         const data = {
-          "error_code": $('input[name=error_code]').val(),
+          "error_code": $('#errorList').val(),
           "model_id": $('#modelList').val()
         }
         $.get( "result/" , data).done(function( data ) {
-          console.log( data );
+          console.log(data)
           $(".output__area").empty();
           $('.output__area').append($('<iframe>', {
             src: data.solution.replace("view", "preview"),
