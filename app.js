@@ -20,10 +20,6 @@ app.use(
 		fileFilter: function (req, file, callback) {
 			var ext = path.extname(file.originalname);
 			if (
-				ext !== '.png' &&
-				ext !== '.jpg' &&
-				ext !== '.gif' &&
-				ext !== '.jpeg' &&
         ext !== '.pdf'
 			) {
 				return callback(new Error('Only images are allowed'));
