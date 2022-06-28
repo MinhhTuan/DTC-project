@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser')
 const db = require('./util/database')
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 
@@ -29,7 +30,6 @@ Solution.belongsTo(Model, {
   onDelete: 'CASCADE'
 })
 
-
-
 db.sync().then(app.listen(3000))
+
 

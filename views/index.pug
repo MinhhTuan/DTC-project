@@ -1,80 +1,124 @@
-doctype html
-head
-  meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title DTC searching
-  link(rel='stylesheet' href='css/style.css')
-  link(rel='stylesheet' href='css/reset.css')
-  script(src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous')
+extend ./layouts/main-layout.pug
+block content
+  .container
+    .banner 
+      img(src="images/car-machine-2.jpg", alt="car")
+    .query__area
+      .query__left
+        .brand
+          select#brandList.select__box
+            if brands.length  > 0
+              each brand in brands 
+                option(value=brand.id) #{brand.brand_name}
+            
+            option(selected='selected' value='0') Chọn hãng xe
+        .model
+          select#modelList.select__box(name='model_id')
+            option(selected='selected' value='0') Chọn dòng xe
+      .query__right 
+        .year
+          select#yearList.select__box
+            if years.length  > 0
+              each year in years 
+                option(value=year) #{year}
+            option(selected='selected' value='0') Chọn năm sản xuất
+        .error__code
+          select#errorList.select__box
+            option(selected='selected' value='0') Chọn mã lỗi
+    button#btnSubmit.btn Tra cứu              
+      i.fa-solid.fa-magnifying-glass
+    .output__area
 
-.header
-  .header__left
-    img.page__logo(src='' alt='')
-    a.title Diagnostic Trouble Code
-  .header__right
-    a.team Team
-    a.slide Slide
-    a.report Report
-.container
-  .query__area
-    .brand
-      select#brandList.brand__list
-        if brands.length  > 0
-          each brand in brands 
-            option(value=brand.id) #{brand.brand_name}
-        
-        option(selected='selected' value='0') --Ch&#x1ECD;n h&atilde;ng xe--
-    .model
-      select#modelList.model__list(name='model_id')
-        option(selected='selected' value='0') --Ch&#x1ECD;n d&ograve;ng xe--
-    .year
-      select#yearList.year__list
-        if years.length  > 0
-          each year in years 
-            option(value=year) #{year}
-        option(selected='selected' value='0') --Ch&#x1ECD;n n&abreve;m s&#x1EA3;n xu&#x1EA5;t--
-    .error__code
-      input(type='search' name='error_code' placeholder='Nhập mã lỗi')
-    button#btnSubmit.btn Tra c&#x1EE9;u
-  .output__area
-    
+    #about.about__section 
+      h2.about__title About us 
+      .user__list
+        .user__card
+          img.avatar(src="https://loremflickr.com/320/240" alt="avatar")
+          h5.name Tuan Nguyen
+          span.description Nguyen Tat Thanh University
+          .media 
+            a.icon(href="https://www.facebook.com/profile.php?id=100010085977207" target="_blank" rel="noopener") 
+              i.fa-brands.fa-facebook
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-instagram
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-telegram
+        .user__card
+          img.avatar(src="https://loremflickr.com/320/240" alt="avatar")
+          h5.name Lorem Alan
+          span.description Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime voluptatum possimus nam porro. Dolor laudantium dolores deleniti ut nulla, sequi cumque recusandae aliquam blanditiis labore reprehenderit placeat aperiam, a obcaecati.
+          .media 
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-facebook
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-instagram
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-telegram
+        .user__card
+          img.avatar(src="https://loremflickr.com/320/240" alt="avatar")
+          h5.name Lorem Alan
+          span.description Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime voluptatum possimus nam porro. Dolor laudantium dolores deleniti ut nulla, sequi cumque recusandae aliquam blanditiis labore reprehenderit placeat aperiam, a obcaecati.
+          .media 
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-facebook
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-instagram
+            a.icon(href="#" target="_blank" rel="noopener") 
+              i.fa-brands.fa-telegram
 
 
-
-  script.
-    $("#brandList").on("change", function () {
-        let brand = $(this).val();
-        
-        $.get( "/models/" + brand, function( data ) {
-          $("#modelList").empty();
-          $('#modelList').append($('<option>', {
-              value: 0,
-              text: "--Chọn dòng xe--"
-          }));
-          $.each(data, function( index, obj) {
+    script.
+      $("#brandList").on("change", function () {
+          let brand = $(this).val();
+          
+          $.get( "/models/" + brand, function( data ) {
+            $("#modelList").empty();
             $('#modelList').append($('<option>', {
-                value: obj.id,
-                text: obj.model_name
+                value: 0,
+                text: "Chọn dòng xe"
             }));
+            $.each(data, function( index, obj) {
+              $('#modelList').append($('<option>', {
+                  value: obj.id,
+                  text: obj.model_name
+              }));
+            });
           });
-        });
-    });
-
-    $("#btnSubmit").on("click", function(){
-      const data = {
-        "error_code": $('input[name=error_code]').val(),
-        "model_id": $('#modelList').val()
-      }
-      $.get( "result/" , data).done(function( data ) {
-        console.log( data );
-        $(".output__area").empty();
-        $('.output__area').append($('<iframe>', {
-          src: data.solution.replace("view", "preview"),
-          width: '100%',
-          height: '100%',
-          allow: 'autoplay'
-        }));
       });
-    })
-  
+      
+      $("#modelList").on("change", function () {
+          let model = $(this).val();
+          
+          $.get( "/errors/" + model, function( data ) {
+            $("#errorList").empty();
+            $('#errorList').append($('<option>', {
+                value: 0,
+                text: "Chọn mã lỗi"
+            }));
+            $.each(data, function( index, obj) {
+              $('#errorList').append($('<option>', {
+                  value: obj.id,
+                  text: obj.error_code
+              }));
+            });
+          });
+      });
+
+      $("#btnSubmit").on("click", function(){
+        const data = {
+          "error_code": $('#errorList').val(),
+          "model_id": $('#modelList').val()
+        }
+        $.get( "result/" , data).done(function( data ) {
+          console.log(data)
+          $(".output__area").empty();
+          $('.output__area').append($('<iframe>', {
+            src: data.solution.replace("view", "preview"),
+            width: '100%',
+            height: '100%',
+            allow: 'autoplay'
+          }));
+        });
+      })
+    
+  //- script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js' integrity='sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2' crossorigin='anonymous')
