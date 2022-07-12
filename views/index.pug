@@ -27,6 +27,7 @@ block content
             option(selected='selected' value='0') Chọn mã lỗi
     button#btnSubmit.btn Tra cứu              
       i.fa-solid.fa-magnifying-glass
+      
     .output__area
 
     #about.about__section 
@@ -63,6 +64,34 @@ block content
               i.fa-brands.fa-facebook
             
 
+    #sponsor.sponsor__section 
+      h2.about__title Sponsor 
+      form.sponsor__form(action='/sponsor' method='POST' enctype="multipart/form-data")
+        //- input(type="hidden" name="_csrf" value=csrfToken)
+        .brand
+          select#brandList1.select__box
+            if brands.length  > 0
+              each brand in brands 
+                option(value=brand.id) #{brand.brand_name}
+            
+            option(selected='selected' value='0') Chọn hãng xe
+        .model
+          select#modelList1.select__box(name='model_id')
+            option(selected='selected' value='0') Chọn dòng xe
+
+        .year
+          select#yearList1.select__box
+            if years.length  > 0
+              each year in years 
+                option(value=year) #{year}
+            option(selected='selected' value='0') Chọn năm sản xuất
+        .error__code
+          input.error(type='text', name='error_code' value='' placeholder='Nhập mã lỗi')
+        input(type='hidden' name='year1' id='year1' value='' required)
+        input(type='hidden' name='modelId' id='modelId' value='' required)
+        label#label.label(for="file") Only pdf files be accepted
+        input(type='file' name='file' id='file' style='display:none;' required)
+        button#btnSubmit.btn(type='submit') Đóng góp             
 
     script.
       $("#brandList").on("change", function () {
@@ -82,6 +111,24 @@ block content
             });
           });
       });
+
+      $("#brandList1").on("change", function () {
+          let brand = $(this).val();
+          
+          $.get( "/models/" + brand, function( data ) {
+            $("#modelList1").empty();
+            $('#modelList1').append($('<option>', {
+                value: 0,
+                text: "Chọn dòng xe"
+            }));
+            $.each(data, function( index, obj) {
+              $('#modelList1').append($('<option>', {
+                  value: obj.id,
+                  text: obj.model_name
+              }));
+            });
+          });
+      });   
       
       $("#modelList").on("change", function () {
           let model = $(this).val();
@@ -100,6 +147,22 @@ block content
             });
           });
       });
+
+      $("#modelList1").on("change", function () {
+          let model = $(this).val();
+          console.log(model)
+          $("#modelId").val(model);
+      });
+
+      $("#yearList1").on("change", function () {
+          let year = $(this).val();
+          console.log(year)
+          $("#year1").val(year);
+      });
+
+      $("#file").on("change", function(){
+        $("#label").text($('#file')[0].files[0].name);
+      })
 
       $("#btnSubmit").on("click", function(){
         const data = {

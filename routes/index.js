@@ -6,6 +6,7 @@ router.get('/', indexController.getBrands)
 router.get('/models/:brandId', indexController.getModels)
 router.get('/errors/:modelId', indexController.getErrorCodes)
 router.get('/result', indexController.getResult)
+router.post('/sponsor', indexController.sponsor)
 
 module.exports = router
 

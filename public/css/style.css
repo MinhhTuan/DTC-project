@@ -247,6 +247,48 @@ input {
    -webkit-box-orient: vertical;
 }
 
+.sponsor__section {
+  margin-top: 40px;
+  width: 100%;
+  height: auto;
+}
+
+.sponsor__form {
+  width:  600px;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.label {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #183748;
+  width: 350px;
+  border-radius: 50px;
+  border: dashed 2px #4AC8B1;
+  text-align: center;
+  height: 52px;
+  margin-bottom: 20px; 
+  box-sizing: border-box;
+  padding-top: 15px;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  overflow: hidden;
+  white-space: nowrap;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+           line-clamp: 1; 
+   -webkit-box-orient: vertical;
+}
+
 .footer {
   margin-top: 80px;
   width: 100%;
